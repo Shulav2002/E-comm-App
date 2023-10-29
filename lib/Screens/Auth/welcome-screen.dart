@@ -82,7 +82,8 @@ class WelcomeScreen extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.bold)),
                   onPressed: () {
-                    Get.to(() => signinScreen());
+                    Get.to(() => signinScreen(),
+                        transition: Transition.rightToLeft);
                   },
                 ),
               ),

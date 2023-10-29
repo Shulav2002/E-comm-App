@@ -1,11 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, unused_local_variable
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lottie/lottie.dart';
+import 'package:summer_project/Controllers/sign-in-controller.dart';
 import 'package:summer_project/Screens/Auth/signup-screen.dart';
+import 'package:summer_project/Screens/User/main-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 
 class signinScreen extends StatefulWidget {
@@ -16,6 +19,9 @@ class signinScreen extends StatefulWidget {
 }
 
 class _signinScreenState extends State<signinScreen> {
+  final SignInController signInController = Get.put(SignInController());
+  TextEditingController userEmail = TextEditingController();
+  TextEditingController userPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(builder: (context, isKeyboardVisible) {
@@ -31,7 +37,7 @@ class _signinScreenState extends State<signinScreen> {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        body: Container(
+        body: SingleChildScrollView(
           child: Column(
             children: [
               isKeyboardVisible
@@ -50,6 +56,7 @@ class _signinScreenState extends State<signinScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: TextFormField(
+                      controller: userEmail,
                       cursorColor: AppConstant.appSecondaryColor,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
@@ -64,19 +71,30 @@ class _signinScreenState extends State<signinScreen> {
                   margin: EdgeInsets.symmetric(horizontal: 5.0),
                   width: Get.width,
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextFormField(
-                      cursorColor: AppConstant.appSecondaryColor,
-                      keyboardType: TextInputType.visiblePassword,
-                      decoration: InputDecoration(
-                          hintText: "Password",
-                          prefixIcon: Icon(Icons.password),
-                          suffixIcon: Icon(Icons.visibility_off),
-                          contentPadding: EdgeInsets.only(top: 2.0, left: 8.0),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0))),
-                    ),
-                  )),
+                      padding: const EdgeInsets.all(10.0),
+                      child: Obx(
+                        () => TextFormField(
+                          controller: userPassword,
+                          obscureText: signInController.isPasswordVisible.value,
+                          cursorColor: AppConstant.appSecondaryColor,
+                          keyboardType: TextInputType.visiblePassword,
+                          decoration: InputDecoration(
+                              hintText: "Password",
+                              prefixIcon: Icon(Icons.password),
+                              suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    signInController.isPasswordVisible.toggle();
+                                  },
+                                  child:
+                                      signInController.isPasswordVisible.value
+                                          ? Icon(Icons.visibility_off)
+                                          : Icon(Icons.visibility)),
+                              contentPadding:
+                                  EdgeInsets.only(top: 2.0, left: 8.0),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0))),
+                        ),
+                      ))),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10.0),
                 alignment: Alignment.centerRight,
@@ -104,7 +122,38 @@ class _signinScreenState extends State<signinScreen> {
                             color: AppConstant.appTextColor,
                             fontSize: 16,
                             fontWeight: FontWeight.bold)),
-                    onPressed: () {},
+                    onPressed: () async {
+                      String email = userEmail.text.trim();
+                      String password = userPassword.text.trim();
+
+                      if (email.isEmpty || password.isEmpty) {
+                        Get.snackbar("Error", 'Please fill all details');
+                      } else {
+                        UserCredential? userCredentials = await signInController
+                            .signInMethod(email, password);
+
+                        if (userCredentials != null) {
+                          if (userCredentials.user!.emailVerified) {
+                            Get.offAll(() => MainScreen());
+                            Get.snackbar("Success", 'Login Successfull',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: AppConstant.appSecondaryColor,
+                                colorText: AppConstant.appTextColor);
+                          } else {
+                            Get.snackbar(
+                                "Error", 'Please verify you email first',
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: AppConstant.appSecondaryColor,
+                                colorText: AppConstant.appTextColor);
+                          }
+                        } else {
+                          Get.snackbar("Error", 'Please try again',
+                              snackPosition: SnackPosition.BOTTOM,
+                              backgroundColor: AppConstant.appSecondaryColor,
+                              colorText: AppConstant.appTextColor);
+                        }
+                      }
+                    },
                   ),
                 ),
               ),
