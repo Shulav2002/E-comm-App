@@ -1,4 +1,10 @@
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:summer_project/Screens/Auth/welcome-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 
 class MainScreen extends StatelessWidget {
@@ -8,11 +14,29 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          // ignore: prefer_const_constructors
-          title: Text(AppConstant.appMainName),
-          centerTitle: true,
-          backgroundColor: AppConstant.appMainColor),
-    );
+        appBar: AppBar(
+      systemOverlayStyle: SystemUiOverlayStyle(
+          statusBarColor: AppConstant.appSecondaryColor,
+          statusBarBrightness: Brightness.light),
+      backgroundColor: AppConstant.appMainColor,
+
+      // ignore: prefer_const_constructors
+      title: Text(AppConstant.appMainName),
+      centerTitle: true,
+      actions: [
+        GestureDetector(
+          onTap: () async {
+            GoogleSignIn googleSignIn = GoogleSignIn();
+
+            await googleSignIn.signOut();
+            Get.offAll(() => WelcomeScreen());
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Icon(Icons.logout),
+          ),
+        )
+      ],
+    ));
   }
 }
