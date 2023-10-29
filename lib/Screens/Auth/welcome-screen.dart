@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:summer_project/Controllers/google-sign-in-controller.dart';
+import 'package:summer_project/Screens/Auth/signin-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -80,7 +81,9 @@ class WelcomeScreen extends StatelessWidget {
                           color: AppConstant.appTextColor,
                           fontSize: 16,
                           fontWeight: FontWeight.bold)),
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => signinScreen());
+                  },
                 ),
               ),
             ),
