@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:summer_project/Controllers/get-device-token-controller.dart';
 import 'package:summer_project/Models/user-model.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 
@@ -21,6 +22,8 @@ class SignUpController extends GetxController {
     String userPassword,
     String userDeviceToken,
   ) async {
+    final GetDeviceTokenController getDeviceTokenController =
+        Get.put(GetDeviceTokenController());
     try {
       EasyLoading.show(status: "Loading");
 
@@ -37,7 +40,7 @@ class SignUpController extends GetxController {
           email: userEmail,
           phone: userPhone,
           userImg: '',
-          userDeviceToken: userDeviceToken,
+          userDeviceToken: getDeviceTokenController.deviceToken.toString(),
           country: '',
           userAddress: '',
           street: '',

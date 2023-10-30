@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:summer_project/Controllers/sign-in-controller.dart';
+import 'package:summer_project/Screens/Auth/forget-password-screen.dart';
 import 'package:summer_project/Screens/Auth/signup-screen.dart';
 import 'package:summer_project/Screens/User/main-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
@@ -98,11 +99,16 @@ class _signinScreenState extends State<signinScreen> {
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 10.0),
                 alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot password?",
-                  style: TextStyle(
-                      color: AppConstant.appSecondaryColor,
-                      fontWeight: FontWeight.bold),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.to(() => forgetPasswordScreen());
+                  },
+                  child: Text(
+                    "Forgot password?",
+                    style: TextStyle(
+                        color: AppConstant.appSecondaryColor,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               SizedBox(
@@ -127,7 +133,10 @@ class _signinScreenState extends State<signinScreen> {
                       String password = userPassword.text.trim();
 
                       if (email.isEmpty || password.isEmpty) {
-                        Get.snackbar("Error", 'Please fill all details');
+                        Get.snackbar("Error", 'Please fill all details',
+                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: AppConstant.appSecondaryColor,
+                            colorText: AppConstant.appTextColor);
                       } else {
                         UserCredential? userCredentials = await signInController
                             .signInMethod(email, password);
