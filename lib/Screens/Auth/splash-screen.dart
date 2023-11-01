@@ -2,10 +2,14 @@
 // ignore_for_file: avoid_unnecessary_containers, prefer_const_constructors, unused_local_variable, duplicate_ignore, unused_import
 
 import 'dart:async';
+import 'dart:ffi';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:summer_project/Controllers/get-user-data-controller.dart';
+import 'package:summer_project/Screens/Admin/Admin-main-screen.dart';
 import 'package:summer_project/Screens/Auth/welcome-screen.dart';
 import 'package:summer_project/Screens/User/main-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
@@ -18,12 +22,30 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
   @override
   void initState() {
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Get.offAll(() => WelcomeScreen());
+      loggedIn(context);
     });
+  }
+
+  Future<void> loggedIn(BuildContext context) async {
+    //everyTime log in garda state preserve garna khojeko ho if paila admin thyo vane admin hunxa else user hunxa or vice versa
+    if (user != null) {
+      final GetUserDataController getUserDataController =
+          Get.put(GetUserDataController());
+
+      var userData = await getUserDataController.getUserData(user!.uid);
+      if (userData[0]['isAdmin'] == true) {
+        Get.off(() => AdminMainScreen());
+      } else {
+        Get.off(() => MainScreen());
+      }
+    } else {
+      Get.to(() => WelcomeScreen());
+    }
   }
 
   @override

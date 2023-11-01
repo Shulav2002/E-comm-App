@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, unused_local_variable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, unused_local_variable, unnecessary_null_comparison
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +6,9 @@ import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:lottie/lottie.dart';
+import 'package:summer_project/Controllers/get-user-data-controller.dart';
 import 'package:summer_project/Controllers/sign-in-controller.dart';
+import 'package:summer_project/Screens/Admin/Admin-main-screen.dart';
 import 'package:summer_project/Screens/Auth/forget-password-screen.dart';
 import 'package:summer_project/Screens/Auth/signup-screen.dart';
 import 'package:summer_project/Screens/User/main-screen.dart';
@@ -21,6 +23,9 @@ class signinScreen extends StatefulWidget {
 
 class _signinScreenState extends State<signinScreen> {
   final SignInController signInController = Get.put(SignInController());
+  final GetUserDataController getUserDataController =
+      Get.put(GetUserDataController());
+
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword = TextEditingController();
   @override
@@ -141,13 +146,27 @@ class _signinScreenState extends State<signinScreen> {
                         UserCredential? userCredentials = await signInController
                             .signInMethod(email, password);
 
+                        var userData = await getUserDataController
+                            .getUserData(userCredentials!.user!.uid);
+
                         if (userCredentials != null) {
                           if (userCredentials.user!.emailVerified) {
-                            Get.offAll(() => MainScreen());
-                            Get.snackbar("Success", 'Login Successfull',
-                                snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: AppConstant.appSecondaryColor,
-                                colorText: AppConstant.appTextColor);
+//userData ma admin check gareko
+                            if (userData[0]['isAdmin'] == true) {
+                              Get.snackbar("Success", 'Admin Login Successfull',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor:
+                                      AppConstant.appSecondaryColor,
+                                  colorText: AppConstant.appTextColor);
+                              Get.offAll(() => AdminMainScreen());
+                            } else {
+                              Get.offAll(() => MainScreen());
+                              Get.snackbar("Success", 'User Login Successfull',
+                                  snackPosition: SnackPosition.BOTTOM,
+                                  backgroundColor:
+                                      AppConstant.appSecondaryColor,
+                                  colorText: AppConstant.appTextColor);
+                            }
                           } else {
                             Get.snackbar(
                                 "Error", 'Please verify you email first',
