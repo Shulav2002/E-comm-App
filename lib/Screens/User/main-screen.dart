@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:summer_project/Screens/Auth/welcome-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
+import 'package:summer_project/Widgets/Custom-drawer.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -16,30 +17,19 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-      systemOverlayStyle: SystemUiOverlayStyle(
-          statusBarColor: AppConstant.appSecondaryColor,
-          statusBarBrightness: Brightness.light),
-      backgroundColor: AppConstant.appMainColor,
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: AppConstant.appTextColor),
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: AppConstant.appSecondaryColor,
+            statusBarBrightness: Brightness.light),
+        backgroundColor: AppConstant.appMainColor,
 
-      // ignore: prefer_const_constructors
-      title: Text(AppConstant.appMainName),
-      centerTitle: true,
-      actions: [
-        GestureDetector(
-          onTap: () async {
-            GoogleSignIn googleSignIn = GoogleSignIn();
-            FirebaseAuth _auth = FirebaseAuth.instance;
-            await _auth.signOut();
-            await googleSignIn.signOut();
-            Get.offAll(() => WelcomeScreen());
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(Icons.logout),
-          ),
-        )
-      ],
-    ));
+        // ignore: prefer_const_constructors
+        title: Text(AppConstant.appMainName,
+            style: TextStyle(color: AppConstant.appTextColor)),
+        centerTitle: true,
+      ),
+      drawer: DrawerWidget(),
+    );
   }
 }
