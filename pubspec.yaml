@@ -45,6 +45,8 @@ dependencies:
   flutter_easyloading: ^3.0.5
   firebase_messaging: ^14.7.2
   hexcolor: ^3.0.1
+  carousel_slider: ^4.2.1
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:

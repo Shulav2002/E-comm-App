@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, unused_import
+// ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables, unused_import, avoid_unnecessary_containers
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +9,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:summer_project/Screens/Auth/welcome-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 import 'package:summer_project/Widgets/Custom-drawer.dart';
+import 'package:summer_project/Widgets/banner-widget.dart';
+import 'package:summer_project/Widgets/heading-widget.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -30,6 +32,23 @@ class MainScreen extends StatelessWidget {
         centerTitle: true,
       ),
       drawer: DrawerWidget(),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: Get.height / 90,
+              ),
+              BannerWidget(),
+              // HeadingWidget(headingTitle: "Flash Sale",
+              //   headingSubTitle: "According to your budget",
+              //   onTap: () => Get.to(() => AllFlashSaleProductScreen()),
+              //   buttonText: "See More >",)
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
