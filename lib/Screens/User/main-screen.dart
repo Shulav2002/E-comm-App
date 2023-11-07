@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:summer_project/Screens/Auth/welcome-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
+import 'package:summer_project/Widgets/Categories.dart';
 import 'package:summer_project/Widgets/Custom-drawer.dart';
 import 'package:summer_project/Widgets/banner-widget.dart';
 import 'package:summer_project/Widgets/heading-widget.dart';
@@ -41,10 +42,19 @@ class MainScreen extends StatelessWidget {
                 height: Get.height / 90,
               ),
               BannerWidget(),
-              // HeadingWidget(headingTitle: "Flash Sale",
-              //   headingSubTitle: "According to your budget",
-              //   onTap: () => Get.to(() => AllFlashSaleProductScreen()),
-              //   buttonText: "See More >",)
+              HeadingWidget(
+                headingTitle: "trending",
+                headingSubTitle: "According to your budget",
+                onTap: () {},
+                buttonText: "See More >",
+              ),
+              CateGoriesWidget(),
+              HeadingWidget(
+                headingTitle: "Latest",
+                headingSubTitle: "According to your budget",
+                onTap: () {},
+                buttonText: "See More >",
+              ),
             ],
           ),
         ),
