@@ -13,6 +13,8 @@ import 'package:summer_project/Widgets/Custom-drawer.dart';
 import 'package:summer_project/Widgets/banner-widget.dart';
 import 'package:summer_project/Widgets/heading-widget.dart';
 
+import '../../Widgets/sale-widget.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -55,6 +57,7 @@ class MainScreen extends StatelessWidget {
                 onTap: () {},
                 buttonText: "See More >",
               ),
+              saleWidget(),
             ],
           ),
         ),
