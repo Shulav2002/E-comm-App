@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:summer_project/Screens/Auth/welcome-screen.dart';
+import 'package:summer_project/Screens/User/all-categories.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 import 'package:summer_project/Widgets/Categories.dart';
 import 'package:summer_project/Widgets/Custom-drawer.dart';
@@ -45,9 +46,11 @@ class MainScreen extends StatelessWidget {
               ),
               BannerWidget(),
               HeadingWidget(
-                headingTitle: "trending",
+                headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => Allcategories());
+                },
                 buttonText: "See More >",
               ),
               CateGoriesWidget(),

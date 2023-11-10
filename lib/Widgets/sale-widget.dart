@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import 'package:summer_project/Models/CategoriesModels.dart';
 import 'package:summer_project/Models/productModel.dart';
+import 'package:summer_project/Utils/app-constants.dart';
 
 class saleWidget extends StatelessWidget {
   const saleWidget({super.key});
@@ -73,19 +74,28 @@ class saleWidget extends StatelessWidget {
                         padding: EdgeInsets.all(5.0),
                         child: Container(
                           child: FillImageCard(
-                            borderRadius: 20.0,
-                            width: Get.width / 4,
-                            heightImage: Get.height / 12,
-                            imageProvider: CachedNetworkImageProvider(
-                                productModel.productImages[0]),
-                            title: Center(
-                                child: Text(
-                              productModel.productName,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 12),
-                            )),
-                            footer: Text(''),
-                          ),
+                              borderRadius: 20.0,
+                              width: Get.width / 4,
+                              heightImage: Get.height / 12,
+                              imageProvider: CachedNetworkImageProvider(
+                                  productModel.productImages[0]),
+                              title: Center(
+                                  child: Text(
+                                productModel.productName,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(fontSize: 12),
+                              )),
+                              footer: Row(
+                                children: [
+                                  Text(
+                                    "NRs ${productModel.fullPrice}",
+                                    style: TextStyle(
+                                      fontSize: 12.0,
+                                      // decoration: TextDecoration.lineThrough,
+                                    ),
+                                  )
+                                ],
+                              )),
                         ),
                       )
                     ],
