@@ -28,7 +28,7 @@ class _AllSingleCategoryProductsScreenState
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
-        title: Text('Products'),
+        title: Text(widget.categoryId),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import 'package:summer_project/Models/CategoriesModels.dart';
+import 'package:summer_project/Screens/User/SingleCategory.dart';
 
 class CateGoriesWidget extends StatelessWidget {
   const CateGoriesWidget({super.key});
@@ -48,27 +49,31 @@ class CateGoriesWidget extends StatelessWidget {
                       categoryName: snapshot.data!.docs[index]['categoryName'],
                       createdAt: snapshot.data!.docs[index]['createdAt'],
                       updatedAt: snapshot.data!.docs[index]['updatedAt']);
-                  return Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: Container(
-                          child: FillImageCard(
-                            borderRadius: 20.0,
-                            width: Get.width / 4,
-                            heightImage: Get.height / 12,
-                            imageProvider: CachedNetworkImageProvider(
-                                categoriesModel.categoryImg),
-                            title: Center(
-                                child: Text(
-                              categoriesModel.categoryName,
-                              style: TextStyle(fontSize: 12),
-                            )),
-                            footer: Text(''),
+                  return GestureDetector(
+                    onTap: () => Get.to(() => AllSingleCategoryProductsScreen(
+                        categoryId: categoriesModel.categoryId)),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(5.0),
+                          child: Container(
+                            child: FillImageCard(
+                              borderRadius: 20.0,
+                              width: Get.width / 4,
+                              heightImage: Get.height / 12,
+                              imageProvider: CachedNetworkImageProvider(
+                                  categoriesModel.categoryImg),
+                              title: Center(
+                                  child: Text(
+                                categoriesModel.categoryName,
+                                style: TextStyle(fontSize: 12),
+                              )),
+                              footer: Text(''),
+                            ),
                           ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   );
                 }),
           );

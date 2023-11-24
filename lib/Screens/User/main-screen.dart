@@ -49,7 +49,7 @@ class MainScreen extends StatelessWidget {
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
                 onTap: () {
-                  Get.to(() => Allcategories());
+                  Get.to(() => AllCategoriesScreen());
                 },
                 buttonText: "See More >",
               ),

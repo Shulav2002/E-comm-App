@@ -116,10 +116,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             widget.productModel.isSale == true &&
                                     widget.productModel.salePrice != ''
                                 ? Text(
-                                    "PKR: " + widget.productModel.salePrice,
+                                    "Nrs: " + widget.productModel.salePrice,
                                   )
                                 : Text(
-                                    "PKR: " + widget.productModel.fullPrice,
+                                    "Nrs: " + widget.productModel.fullPrice,
                                   ),
                           ],
                         ),

@@ -145,7 +145,7 @@ class _CartScreenState extends State<CartScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Total: PKR 12,000",
+              "Total: ",
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             Padding(
