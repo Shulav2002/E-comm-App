@@ -14,7 +14,10 @@ import 'package:summer_project/Widgets/Custom-drawer.dart';
 import 'package:summer_project/Widgets/banner-widget.dart';
 import 'package:summer_project/Widgets/heading-widget.dart';
 
+import '../../Widgets/all-productWidgets.dart';
 import '../../Widgets/sale-widget.dart';
+import 'all-products.dart';
+import 'all-sale.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -55,12 +58,21 @@ class MainScreen extends StatelessWidget {
               ),
               CateGoriesWidget(),
               HeadingWidget(
-                headingTitle: "Latest",
+                headingTitle: "Sale",
                 headingSubTitle: "According to your budget",
-                onTap: () {},
+                onTap: () {
+                  Get.to(() => AllSaleProducts());
+                },
                 buttonText: "See More >",
               ),
               saleWidget(),
+              HeadingWidget(
+                headingTitle: "All Products",
+                headingSubTitle: "According to your budget",
+                onTap: () => Get.to(() => AllProductsScreen()),
+                buttonText: "See More >",
+              ),
+              AllProductsWidget(),
             ],
           ),
         ),
