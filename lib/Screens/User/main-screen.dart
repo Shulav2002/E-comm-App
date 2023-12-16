@@ -18,6 +18,7 @@ import '../../Widgets/all-productWidgets.dart';
 import '../../Widgets/sale-widget.dart';
 import 'all-products.dart';
 import 'all-sale.dart';
+import 'cart-panel.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -37,6 +38,17 @@ class MainScreen extends StatelessWidget {
         title: Text(AppConstant.appMainName,
             style: TextStyle(color: AppConstant.appTextColor)),
         centerTitle: true,
+        actions: [
+          GestureDetector(
+            onTap: () => Get.to(() => CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.shopping_cart,
+              ),
+            ),
+          ),
+        ],
       ),
       drawer: DrawerWidget(),
       body: SingleChildScrollView(
