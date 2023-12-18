@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:summer_project/Screens/User/all-products.dart';
+import 'package:summer_project/Screens/User/main-screen.dart';
 import 'package:summer_project/Utils/app-constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -41,7 +43,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 ),
                 leading: CircleAvatar(
                   radius: 22.0,
-                  backgroundColor: AppConstant.appMainColor,
+                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
                   child: Text("w"),
                 ),
               ),
@@ -50,11 +52,14 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               indent: 5.0,
               endIndent: 5.0,
               thickness: 1,
-              color: Colors.amber,
+              color: Color.fromARGB(255, 255, 255, 255),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
+                onTap: () {
+                  Get.to(() => MainScreen());
+                },
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Text(
                   "Home",
@@ -69,6 +74,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: ListTile(
+                onTap: () {
+                  Get.to(() => AllProductsScreen());
+                },
                 titleAlignment: ListTileTitleAlignment.center,
                 title: Text(
                   "Products",
@@ -135,7 +143,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             ),
           ],
         ),
-        backgroundColor: AppConstant.appSecondaryColor,
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
       ),
     );
   }

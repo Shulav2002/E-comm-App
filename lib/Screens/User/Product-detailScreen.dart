@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:summer_project/Models/cartModel.dart';
 import 'package:summer_project/Models/productModel.dart';
@@ -29,11 +30,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppConstant.appTextColor),
-        backgroundColor: AppConstant.appMainColor,
+        centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
+        iconTheme: IconThemeData(color: const Color.fromARGB(255, 0, 0, 0)),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Text(
           "Product Details",
-          style: TextStyle(color: AppConstant.appTextColor),
+          style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
         ),
         actions: [
           GestureDetector(
@@ -148,42 +153,53 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Material(
-                            child: Container(
-                              width: Get.width / 3.0,
-                              height: Get.height / 16,
-                              decoration: BoxDecoration(
-                                color: AppConstant.appSecondaryColor,
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: TextButton(
-                                child: Text(
-                                  "WhatsApp",
-                                  style: TextStyle(
-                                      color: AppConstant.appTextColor),
-                                ),
-                                onPressed: () {
-                                  // Get.to(() => SignInScreen());
-                                },
-                              ),
-                            ),
-                          ),
+                          // Material(
+                          //   child: Container(
+                          //     width: Get.width / 3.0,
+                          //     height: Get.height / 16,
+                          //     decoration: BoxDecoration(
+                          //       color: AppConstant.appSecondaryColor,
+                          //       borderRadius: BorderRadius.circular(20.0),
+                          //     ),
+                          //     child: TextButton(
+                          //       child: Text(
+                          //         "Chat",
+                          //         style: TextStyle(
+                          //             color: AppConstant.appTextColor),
+                          //       ),
+                          //       onPressed: () {
+                          //         // Get.to(() => SignInScreen());
+                          //       },
+                          //     ),
+                          //   ),
+                          // ),
                           SizedBox(
                             width: 5.0,
                           ),
                           Material(
                             child: Container(
                               width: Get.width / 3.0,
-                              height: Get.height / 16,
+                              height: Get.height / 15,
                               decoration: BoxDecoration(
-                                color: AppConstant.appSecondaryColor,
+                                color: const Color.fromARGB(255, 0, 0, 0),
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                               child: TextButton(
-                                child: Text(
-                                  "Add to cart",
-                                  style: TextStyle(
-                                      color: AppConstant.appTextColor),
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.zero,
+                                  backgroundColor:
+                                      Color.fromARGB(0, 219, 40, 40),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(
+                                      8.0), // Add padding as needed
+                                  child: Text(
+                                    "Add to Cart",
+                                    style: TextStyle(
+                                      color: Colors
+                                          .white, // Change the text color if needed
+                                    ),
+                                  ),
                                 ),
                                 onPressed: () async {
                                   // Get.to(() => SignInScreen());
@@ -232,7 +248,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         'productQuantity': updatedQuantity,
         'productTotalPrice': totalPrice
       });
-
+      Get.snackbar("Product added", '',
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Color.fromARGB(255, 31, 31, 31),
+          colorText: AppConstant.appTextColor);
       print("product exists");
     } else {
       await FirebaseFirestore.instance.collection('cart').doc(uId).set(

@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 
@@ -19,13 +20,17 @@ class AllProductsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
         iconTheme: IconThemeData(
-          color: AppConstant.appTextColor,
+          color: const Color.fromARGB(255, 0, 0, 0),
         ),
-        backgroundColor: AppConstant.appMainColor,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Text(
           'All Products',
-          style: TextStyle(color: AppConstant.appTextColor),
+          style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
         ),
       ),
       body: FutureBuilder(

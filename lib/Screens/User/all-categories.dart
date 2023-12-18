@@ -1,23 +1,22 @@
-// ignore_for_file: file_names, prefer_const_constructors, sized_box_for_whitespace, avoid_unnecessary_containers
-
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_card/image_card.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:summer_project/Models/CategoriesModels.dart';
 import 'package:summer_project/Screens/User/SingleCategory.dart';
+import 'package:image_card/image_card.dart';
 
 import '../../Utils/app-constants.dart';
 
 class AllCategoriesScreen extends StatefulWidget {
-  const AllCategoriesScreen({super.key});
+  const AllCategoriesScreen({Key? key}) : super(key: key);
 
   @override
-  State<AllCategoriesScreen> createState() => _AllCategoriesScreenState();
+  _AllCategoriesScreenState createState() => _AllCategoriesScreenState();
 }
 
 class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
@@ -25,13 +24,18 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
         iconTheme: IconThemeData(
-          color: AppConstant.appTextColor,
+          color: Color.fromARGB(255, 0, 0, 0),
         ),
-        backgroundColor: AppConstant.appMainColor,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
         title: Text(
           "All Categories",
-          style: TextStyle(color: AppConstant.appTextColor),
+          textAlign: TextAlign.center,
+          style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
         ),
       ),
       body: FutureBuilder(
@@ -42,6 +46,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
               child: Text("Error"),
             );
           }
+
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Container(
               height: Get.height / 5,
@@ -66,7 +71,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                 crossAxisCount: 2,
                 mainAxisSpacing: 3,
                 crossAxisSpacing: 3,
-                childAspectRatio: 1.19,
+                childAspectRatio: 1.0,
               ),
               itemBuilder: (context, index) {
                 CategoriesModel categoriesModel = CategoriesModel(
@@ -76,46 +81,73 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                   createdAt: snapshot.data!.docs[index]['createdAt'],
                   updatedAt: snapshot.data!.docs[index]['updatedAt'],
                 );
-                return Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () => Get.to(() => AllSingleCategoryProductsScreen(
-                            categoryId: categoriesModel.categoryId,
-                          )),
-                      child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Container(
-                          child: FillImageCard(
-                            borderRadius: 20.0,
-                            width: Get.width / 2.3,
-                            heightImage: Get.height / 10,
-                            imageProvider: CachedNetworkImageProvider(
-                              categoriesModel.categoryImg,
+                return GestureDetector(
+                  onTap: () {
+                    Get.to(
+                        () => AllSingleCategoryProductsScreen(
+                              categoryId: categoriesModel.categoryId,
                             ),
-                            title: Center(
-                              child: Text(
-                                categoriesModel.categoryName,
-                                style: TextStyle(fontSize: 12.0),
-                              ),
+                        transition:
+                            Transition.downToUp); // Change the transition here
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Stack(
+                        alignment: Alignment.bottomLeft,
+                        children: [
+                          Container(
+                            width: Get.width / 0.3,
+                            height: Get.width / 2.3 * 1.19,
+                            child: CachedNetworkImage(
+                              imageUrl: categoriesModel.categoryImg,
+                              fit: BoxFit.cover,
                             ),
                           ),
-                        ),
+                          Container(
+                            width: Get.width / 2.3,
+                            padding: EdgeInsets.all(8.0),
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.5),
+                                ],
+                              ),
+                              borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20.0),
+                                bottomRight: Radius.circular(20.0),
+                              ),
+                            ),
+                            child: Text(
+                              categoriesModel.categoryName,
+                              style: TextStyle(
+                                fontFamily: 'Roboto',
+                                fontSize: 14.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black,
+                                    offset: Offset(1.0, 1.0),
+                                    blurRadius: 3.0,
+                                  ),
+                                ],
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 );
               },
             );
-
-            // Container(
-            //   height: Get.height / 5.0,
-            //   child: ListView.builder(
-            //     itemCount: snapshot.data!.docs.length,
-            //     shrinkWrap: true,
-            //     scrollDirection: Axis.horizontal,
-
-            //   ),
-            // );
           }
 
           return Container();

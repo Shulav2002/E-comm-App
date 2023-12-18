@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import 'package:summer_project/Models/productModel.dart';
@@ -27,8 +28,14 @@ class _AllSingleCategoryProductsScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
-        title: Text(widget.categoryId),
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        title: Text(
+          widget.categoryId,
+          style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
+        ),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance
@@ -94,8 +101,10 @@ class _AllSingleCategoryProductsScreenState
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () => Get.to(() =>
-                          ProductDetailsScreen(productModel: productModel)),
+                      onTap: () => Get.to(
+                        () => ProductDetailsScreen(productModel: productModel),
+                        transition: Transition.downToUp,
+                      ),
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(

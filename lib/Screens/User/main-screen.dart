@@ -16,6 +16,7 @@ import 'package:summer_project/Widgets/heading-widget.dart';
 
 import '../../Widgets/all-productWidgets.dart';
 import '../../Widgets/sale-widget.dart';
+import '../searchScreen.dart';
 import 'all-products.dart';
 import 'all-sale.dart';
 import 'cart-panel.dart';
@@ -28,23 +29,34 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: AppConstant.appTextColor),
+        iconTheme: IconThemeData(color: const Color.fromARGB(255, 0, 0, 0)),
         systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: AppConstant.appSecondaryColor,
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
             statusBarBrightness: Brightness.light),
-        backgroundColor: AppConstant.appMainColor,
+        backgroundColor: Color.fromARGB(255, 255, 255, 255),
 
         // ignore: prefer_const_constructors
         title: Text(AppConstant.appMainName,
-            style: TextStyle(color: AppConstant.appTextColor)),
+            style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0))),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            color: Colors.black,
+            onPressed: () {
+              Get.to(() => SearchScreen());
+              // Handle search button press here
+              // You can navigate to a search screen or show a search bar overlay
+              // For simplicity, we'll print a message for demonstration purposes
+            },
+          ),
           GestureDetector(
             onTap: () => Get.to(() => CartScreen()),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
                 Icons.shopping_cart,
+                color: Colors.black,
               ),
             ),
           ),
@@ -56,10 +68,10 @@ class MainScreen extends StatelessWidget {
         child: Container(
           child: Column(
             children: [
+              BannerWidget(),
               SizedBox(
                 height: Get.height / 90,
               ),
-              BannerWidget(),
               HeadingWidget(
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
@@ -69,6 +81,9 @@ class MainScreen extends StatelessWidget {
                 buttonText: "See More >",
               ),
               CateGoriesWidget(),
+              SizedBox(
+                height: Get.height / 90,
+              ),
               HeadingWidget(
                 headingTitle: "Sale",
                 headingSubTitle: "According to your budget",

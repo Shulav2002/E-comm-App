@@ -19,10 +19,10 @@ class WelcomeScreen extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: AppConstant.appMainColor,
+        backgroundColor: Color.fromARGB(255, 0, 0, 0),
         title: Text(
           "Welcome",
-          style: TextStyle(color: AppConstant.appTextColor),
+          style: TextStyle(color: const Color.fromARGB(255, 0, 0, 0)),
         ),
       ),
       body: Container(
@@ -46,7 +46,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: Get.width / 1.2,
                 height: Get.height / 12,
                 decoration: BoxDecoration(
-                  color: AppConstant.appSecondaryColor,
+                  color: Color.fromARGB(255, 51, 51, 51),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: TextButton.icon(
@@ -70,7 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                 width: Get.width / 1.2,
                 height: Get.height / 12,
                 decoration: BoxDecoration(
-                  color: AppConstant.appSecondaryColor,
+                  color: const Color.fromARGB(255, 53, 53, 53),
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: TextButton.icon(

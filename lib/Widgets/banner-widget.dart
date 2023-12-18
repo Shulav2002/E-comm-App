@@ -26,13 +26,13 @@ class _BannerWidgetState extends State<BannerWidget> {
           items: _bannerController.bannerUrls
               .map(
                 (imageUrls) => ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
+                  borderRadius: BorderRadius.zero,
                   child: CachedNetworkImage(
                     imageUrl: imageUrls,
                     fit: BoxFit.cover,
-                    width: Get.width - 10,
+                    width: Get.width - 1,
                     placeholder: (context, url) => ColoredBox(
-                      color: Colors.white,
+                      color: Colors.black,
                       child: Center(
                         child: CupertinoActivityIndicator(),
                       ),

@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +28,11 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
+        centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Text('Cart Screen'),
       ),
       body: StreamBuilder(
@@ -109,7 +114,7 @@ class _CartScreenState extends State<CartScreen> {
                       color: AppConstant.appTextColor,
                       child: ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: AppConstant.appMainColor,
+                          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
                           backgroundImage:
                               NetworkImage(cartModel.productImages[0]),
                         ),
@@ -132,18 +137,23 @@ class _CartScreenState extends State<CartScreen> {
                                       .update({
                                     'productQuantity':
                                         cartModel.productQuantity - 1,
-                                    'productTotalPrice': (double.parse(
-                                            cartModel.isSale
-                                                ? cartModel.salePrice
-                                                : cartModel.fullPrice) *
-                                        (cartModel.productQuantity - 1))
+                                    'productTotalPrice':
+                                        (double.parse(cartModel.fullPrice) *
+                                            (cartModel.productQuantity - 1))
                                   });
                                 }
                               },
                               child: CircleAvatar(
                                 radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('-'),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 0, 0, 0),
+                                child: Text(
+                                  '-',
+                                  style: TextStyle(
+                                    color: Colors
+                                        .white, // Change the text color if needed
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -160,21 +170,22 @@ class _CartScreenState extends State<CartScreen> {
                                       .update({
                                     'productQuantity':
                                         cartModel.productQuantity + 1,
-                                    'productTotalPrice': double.parse(
-                                            cartModel.isSale
-                                                ? cartModel.salePrice
-                                                : cartModel.fullPrice) +
-                                        double.parse(cartModel.isSale
-                                                ? cartModel.salePrice
-                                                : cartModel.fullPrice) *
-                                            (cartModel.productQuantity)
+                                    'productTotalPrice':
+                                        double.parse(cartModel.fullPrice) +
+                                            double.parse(cartModel.fullPrice) *
+                                                (cartModel.productQuantity)
                                   });
                                 }
                               },
                               child: CircleAvatar(
                                 radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('+'),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 0, 0, 0),
+                                child: Text('+',
+                                    style: TextStyle(
+                                      color: Colors
+                                          .white, // Change the text color if needed
+                                    )),
                               ),
                             )
                           ],
@@ -208,7 +219,7 @@ class _CartScreenState extends State<CartScreen> {
                   width: Get.width / 2.0,
                   height: Get.height / 18,
                   decoration: BoxDecoration(
-                    color: AppConstant.appSecondaryColor,
+                    color: const Color.fromARGB(255, 0, 0, 0),
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: TextButton(

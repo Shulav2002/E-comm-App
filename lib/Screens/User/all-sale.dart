@@ -4,6 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import '../../Models/productModel.dart';
@@ -23,7 +24,11 @@ class _AllSaleProductsState extends State<AllSaleProducts> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
+        centerTitle: true,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Text("Products on sale"),
       ),
       body: FutureBuilder(

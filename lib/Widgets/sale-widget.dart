@@ -107,7 +107,7 @@ class saleWidget extends StatelessWidget {
                                   "${productModel.fullPrice}",
                                   style: TextStyle(
                                     fontSize: 10.0,
-                                    color: AppConstant.appSecondaryColor,
+                                    color: const Color.fromARGB(255, 0, 0, 0),
                                     decoration: TextDecoration.lineThrough,
                                   ),
                                 ),

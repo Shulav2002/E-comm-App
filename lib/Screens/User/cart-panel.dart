@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +27,11 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppConstant.appMainColor,
+        systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarColor: Color.fromARGB(255, 0, 0, 0),
+            statusBarBrightness: Brightness.light),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         title: Text('Cart Screen'),
       ),
       body: StreamBuilder(
@@ -139,8 +144,15 @@ class _CartScreenState extends State<CartScreen> {
                               },
                               child: CircleAvatar(
                                 radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('-'),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 0, 0, 0),
+                                child: Text(
+                                  '-',
+                                  style: TextStyle(
+                                    color: Colors
+                                        .white, // Change the text color if needed
+                                  ),
+                                ),
                               ),
                             ),
                             SizedBox(
@@ -166,8 +178,14 @@ class _CartScreenState extends State<CartScreen> {
                               },
                               child: CircleAvatar(
                                 radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('+'),
+                                backgroundColor: Color.fromARGB(255, 0, 0, 0),
+                                child: Text(
+                                  '+',
+                                  style: TextStyle(
+                                    color: Colors
+                                        .white, // Change the text color if needed
+                                  ),
+                                ),
                               ),
                             )
                           ],
