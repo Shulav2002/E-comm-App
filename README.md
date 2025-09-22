@@ -1,44 +1,25 @@
 🛒 Flutter E-Commerce App
 
-A modern e-commerce mobile application built with Flutter (Dart). The app provides a smooth shopping experience with product browsing, cart management, checkout, and order tracking.
+A modern customer-facing shopping app built with Flutter (Dart). Customers can browse products, add them to cart, place orders, and pay securely via Khalti.
 
 ✨ Features
 
-🏪 Product Listings with images, descriptions, and prices
+🔍 Product Browsing with categories and search
 
-🔍 Search & Filter functionality for quick product discovery
+🛒 Cart & Checkout with Khalti payment integration
 
-🛒 Shopping Cart with add/remove/update items
+👤 User Accounts (Firebase Authentication)
 
-💳 Checkout Process (payment gateway integration ready)
+📦 Order Tracking with real-time updates from Firebase
 
-👤 User Authentication (login/signup/profile)
+🔔 Notifications via Firebase Cloud Messaging
 
-📦 Order Management with history and tracking
-
-🌙 Dark Mode support (optional)
-
-🔔 Push Notifications for offers and order updates
+🌙 Dark Mode support
 
 🚀 Tech Stack
 
 Frontend: Flutter (Dart)
 
-State Management: Provider / Riverpod / Bloc (depending on implementation)
+Backend & Database: Firebase (Auth, Firestore, Storage, FCM)
 
-Backend: REST API or Firebase (plug-in ready)
-
-Database: Firebase Firestore / SQLite (local storage for cart & orders)
-
-Payments: Stripe, Razorpay, or PayPal integration
-
-📦 Setup
-Prerequisites
-
-Flutter SDK installed
-
-Dart installed
-
-Android Studio / VS Code with Flutter plugin
-
-Backend (Firebase or custom REST API)
+Payments: Khalti Payment Gateway
