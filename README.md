@@ -1,16 +1,44 @@
-# summer_project
+🛒 Flutter E-Commerce App
 
-A new Flutter project.
+A modern e-commerce mobile application built with Flutter (Dart). The app provides a smooth shopping experience with product browsing, cart management, checkout, and order tracking.
 
-## Getting Started
+✨ Features
 
-This project is a starting point for a Flutter application.
+🏪 Product Listings with images, descriptions, and prices
 
-A few resources to get you started if this is your first Flutter project:
+🔍 Search & Filter functionality for quick product discovery
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🛒 Shopping Cart with add/remove/update items
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+💳 Checkout Process (payment gateway integration ready)
+
+👤 User Authentication (login/signup/profile)
+
+📦 Order Management with history and tracking
+
+🌙 Dark Mode support (optional)
+
+🔔 Push Notifications for offers and order updates
+
+🚀 Tech Stack
+
+Frontend: Flutter (Dart)
+
+State Management: Provider / Riverpod / Bloc (depending on implementation)
+
+Backend: REST API or Firebase (plug-in ready)
+
+Database: Firebase Firestore / SQLite (local storage for cart & orders)
+
+Payments: Stripe, Razorpay, or PayPal integration
+
+📦 Setup
+Prerequisites
+
+Flutter SDK installed
+
+Dart installed
+
+Android Studio / VS Code with Flutter plugin
+
+Backend (Firebase or custom REST API)
